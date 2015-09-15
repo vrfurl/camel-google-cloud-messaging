@@ -28,7 +28,7 @@ public final class GoogleConstants {
      * Endpoint for sending messages.
      */
     public static final String GCM_SEND_ENDPOINT =
-            "https://android.googleapis.com/gcm/send";
+            "https://gcm-http.googleapis.com/gcm/send";
 
     public static final String UTF8 = "UTF-8";
 
@@ -44,7 +44,7 @@ public final class GoogleConstants {
     /**
      * HTTP parameter for registration id.
      */
-    public static final String PARAM_REGISTRATION_ID = "registration_id";
+    public static final String PARAM_REGISTRATION_ID = "to";
 
     /**
      * HTTP parameter for collapse key.
@@ -76,7 +76,10 @@ public final class GoogleConstants {
      * Prefix to HTTP parameter used to set the message time-to-live.
      */
     public static final String PARAM_TIME_TO_LIVE = "time_to_live";
-
+    
+    
+    
+    
     /**
      * Too many messages sent by the sender. Retry after a while.
      */
@@ -165,11 +168,90 @@ public final class GoogleConstants {
      * JSON-only field representing the registration ids.
      */
     public static final String JSON_REGISTRATION_IDS = "registration_ids";
+    
+    /**
+     * JSON-only for registration id.
+     */
+    public static final String JSON_REGISTRATION_ID = "to";
+
 
     /**
      * JSON-only field representing the payload data.
      */
     public static final String JSON_PAYLOAD = "data";
+    
+    
+    
+    //Begin Notification JSON object
+    
+    /**
+     *  this parameter specifies the predefined, user-visible key-value pairs of the notification payload.
+     */
+    public static final String JSON_NOTIFICATION = "notification";
+
+    
+    /**
+     * JSON-only indicates notification title. This field is not visible on iOS phones and tablets.
+     */
+    public static final String JSON_NOTIFICATION_TITLE = "title";
+    
+    /**
+     * JSON-only indicates notification body text.
+     */
+    public static final String JSON_NOTIFICATION_BODY = "body";
+    
+    /**
+     * JSON-only indicates notification icon. On Android: sets value to myicon for drawable resource myicon.
+     */
+    public static final String JSON_NOTIFICATION_ICON = "icon";
+    
+    /**
+     * JSON-only indicates sound to be played. Supports only default currently.
+     */
+    public static final String JSON_NOTIFICATION_SOUND = "sound";
+    
+    /**
+     * JSON-only indicates the badge on client app home icon.
+     */
+    public static final String JSON_NOTIFICATION_BADGE = "badge";
+    
+    /**
+     * JSON-only indicates whether each notification message results in a new entry on the notification center on Android. 
+     * If not set, each request creates a new notification. 
+     * If set, and a notification with the same tag is already being shown, 
+     * the new notification replaces the existing one in notification center.
+     */
+    public static final String JSON_NOTIFICATION_TAG = "tag";
+    
+    /**
+     * JSON-only indicates color of the icon, expressed in #rrggbb format
+     */
+    public static final String JSON_NOTIFICATION_COLOR = "color";
+    
+    /**
+     * JSON-only indicates the action associated with a user click on the notification.
+     */
+    public static final String JSON_NOTIFICATION_CLICK_ACTION = "click_action";
+    
+    /**
+     * JSON-only indicates the key to the body string for localization.
+     */
+    public static final String JSON_NOTIFICATION_BODY_LOC_KEY = "body_loc_key";
+    
+    /**
+     * JSON-only indicates the string value to replace format specifiers in body string for localization.
+     */
+    public static final String JSON_NOTIFICATION_BODY_LOC_ARGS = "body_loc_args";
+    
+    /**
+     * JSON-only indicates the key to the title string for localization.
+     */
+    public static final String JSON_NOTIFICATION_TITLE_LOC_KEY = "title_loc_key";
+    
+    /**
+     * JSON-only indicates the string value to replace format specifiers in title string for localization. 
+     */
+    public static final String JSON_NOTIFICATION_TITLE_LOC_ARGS = "title_loc_args";
 
     /**
      * JSON-only field representing the number of successful messages.

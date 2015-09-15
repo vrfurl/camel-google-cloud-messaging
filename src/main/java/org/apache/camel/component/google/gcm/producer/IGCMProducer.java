@@ -4,6 +4,7 @@ import org.apache.camel.component.google.gcm.model.GCMBody;
 import org.apache.camel.component.google.gcm.model.GCMResponse;
 import org.apache.camel.component.google.gcm.model.MultiCastResponse;
 
+import java.io.IOException;
 import java.util.Set;
 
 /**
@@ -11,8 +12,8 @@ import java.util.Set;
  */
 public interface IGCMProducer {
 
-    public MultiCastResponse send(GCMBody message, Set<String> regIds);
+  public MultiCastResponse send(GCMBody message, Set<String> regIds) throws IOException;
 
-    public GCMResponse send(GCMBody message, String regId);
+  public MultiCastResponse send(GCMBody message, String regId) throws IOException;
 
 }

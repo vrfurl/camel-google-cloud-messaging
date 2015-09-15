@@ -6,6 +6,7 @@ import org.apache.camel.component.google.gcm.model.MultiCastResponse;
 import org.apache.camel.component.google.gcm.producer.GCMProducer;
 import org.apache.camel.component.google.gcm.producer.IGCMProducer;
 
+import java.io.IOException;
 import java.util.Set;
 
 /**
@@ -26,13 +27,13 @@ public class RetrySender implements IGCMProducer {
     }
 
     @Override
-    public MultiCastResponse send(GCMBody message, Set<String> regIds) {
+    public MultiCastResponse send(GCMBody message, Set<String> regIds) throws IOException {
 
         return simpleSender.send(message, regIds);
     }
 
     @Override
-    public GCMResponse send(GCMBody message, String regId) {
+    public MultiCastResponse send(GCMBody message, String regId)throws IOException {
         return simpleSender.send(message, regId);
     }
 

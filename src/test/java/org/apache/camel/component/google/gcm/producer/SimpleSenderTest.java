@@ -29,7 +29,7 @@ public class SimpleSenderTest extends AbstractGCMTestSupport {
 
         SimpleSender simpleSender = new SimpleSender(null, testProperties.get("gcmApiKey").toString());
 
-        GCMResponse response = simpleSender.send(message, testRegID);
+        MultiCastResponse response = simpleSender.send(message, testRegID);
         assertNotNull(response);
     }
 

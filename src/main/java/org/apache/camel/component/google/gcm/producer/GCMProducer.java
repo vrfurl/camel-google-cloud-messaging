@@ -1,24 +1,26 @@
 package org.apache.camel.component.google.gcm.producer;
 
+import static org.apache.camel.component.google.gcm.producer.constants.Util.nonNull;
+
+import java.io.Closeable;
+import java.io.IOException;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
 import org.apache.camel.Exchange;
 import org.apache.camel.Message;
 import org.apache.camel.component.google.gcm.GCMEndpoint;
 import org.apache.camel.component.google.gcm.model.GCMBody;
+import org.apache.camel.component.google.gcm.model.GCMNotification;
 import org.apache.camel.component.google.gcm.producer.constants.CamelHeaderConstants;
 import org.apache.camel.component.google.gcm.producer.http.RetrySender;
 import org.apache.camel.impl.DefaultProducer;
 import org.json.simple.JSONValue;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.io.Closeable;
-import java.io.IOException;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
-
-import static org.apache.camel.component.google.gcm.producer.constants.Util.nonNull;
 
 /**
  * Created by miki on 14.04.2015.
@@ -117,6 +119,7 @@ public abstract class GCMProducer extends DefaultProducer implements IGCMProduce
      * @param camelMessage the message from camel
      * @return message to be sent to GCM;
      */
+    @SuppressWarnings("unchecked")
     private GCMBody getMessageFromHeaders(Message camelMessage) {
         GCMBody.Builder builder = new GCMBody.Builder();
         Object payLoad = camelMessage.getBody();
@@ -141,6 +144,45 @@ public abstract class GCMProducer extends DefaultProducer implements IGCMProduce
                         String.class, endpoint.getConfiguration().getRestrictedPackageName()))
                 .timeToLive(getParameterFromHeaderOrConfig(camelMessage, CamelHeaderConstants.TIME_TO_LIVE,
                         Integer.class, endpoint.getConfiguration().getTimeToLive()));
+        
+        
+        //Building the GCM notification object
+        GCMNotification notification = getParameterFromHeaderOrConfig(camelMessage, CamelHeaderConstants.NOTIFICATION,GCMNotification.class, null);
+        if(notification == null) {
+
+          GCMNotification.Builder notificationBuilder = new  GCMNotification.Builder();
+          notificationBuilder
+          .badge(getParameterFromHeaderOrConfig(camelMessage, CamelHeaderConstants.NOTIFICATION_BADGE,
+                        String.class, null))
+          .body(getParameterFromHeaderOrConfig(camelMessage, CamelHeaderConstants.NOTIFICATION_BODY,
+            String.class, null))            
+          .bodyLocArgs(getParameterFromHeaderOrConfig(camelMessage, CamelHeaderConstants.NOTIFICATION_BODY_LOC_ARGS,
+                        List.class, null))
+          .bodyLocKey(getParameterFromHeaderOrConfig(camelMessage, CamelHeaderConstants.NOTIFICATION_BODY_LOC_KEY,
+                        String.class, null))
+          .clickAction(getParameterFromHeaderOrConfig(camelMessage, CamelHeaderConstants.NOTIFICATION_CLICK_ACTION,
+                        String.class, null))
+          .color(getParameterFromHeaderOrConfig(camelMessage, CamelHeaderConstants.NOTIFICATION_COLOR,
+                        String.class, null))
+          .icon(getParameterFromHeaderOrConfig(camelMessage, CamelHeaderConstants.NOTIFICATION_ICON,
+                        String.class, null))
+          .sound(getParameterFromHeaderOrConfig(camelMessage, CamelHeaderConstants.NOTIFICATION_SOUND,
+                        String.class, null))
+          .tag(getParameterFromHeaderOrConfig(camelMessage, CamelHeaderConstants.NOTIFICATION_TAG,
+                        String.class, null))
+          .title(getParameterFromHeaderOrConfig(camelMessage, CamelHeaderConstants.NOTIFICATION_TITLE,
+                        String.class, null))
+          .titleLocArgs(getParameterFromHeaderOrConfig(camelMessage, CamelHeaderConstants.NOTIFICATION_TITLE_LOC_ARGS,
+                        List.class, null))
+          .titleLocKey(getParameterFromHeaderOrConfig(camelMessage, CamelHeaderConstants.NOTIFICATION_TITLE_LOC_KEY,
+                        String.class, null));
+          
+          builder.notification(notificationBuilder.build());
+        }
+        else {          
+          builder.notification(notification);          
+        }
+        
         return builder.build();
     }
 

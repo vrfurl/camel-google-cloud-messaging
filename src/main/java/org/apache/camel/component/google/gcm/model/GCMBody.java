@@ -66,6 +66,7 @@ public final class GCMBody implements Serializable {
     private final Map<String, String> data;
     private final Boolean dryRun;
     private final String restrictedPackageName;
+    private final GCMNotification notification;
 
     public static final class Builder {
 
@@ -77,6 +78,7 @@ public final class GCMBody implements Serializable {
         private Integer timeToLive;
         private Boolean dryRun;
         private String restrictedPackageName;
+        private GCMNotification notification;
 
         public Builder() {
             this.data = new LinkedHashMap<String, String>();
@@ -140,6 +142,12 @@ public final class GCMBody implements Serializable {
             restrictedPackageName = value;
             return this;
         }
+        
+        
+        public Builder notification(GCMNotification value) {
+          notification = value;
+          return this;
+        }
 
         public GCMBody build() {
             return new GCMBody(this);
@@ -154,6 +162,7 @@ public final class GCMBody implements Serializable {
         timeToLive = builder.timeToLive;
         dryRun = builder.dryRun;
         restrictedPackageName = builder.restrictedPackageName;
+        notification =  builder.notification;
     }
 
     /**
@@ -196,6 +205,11 @@ public final class GCMBody implements Serializable {
      */
     public Map<String, String> getData() {
         return data;
+    }
+    
+    
+    public GCMNotification getNotification() {
+      return notification;
     }
 
     @Override
