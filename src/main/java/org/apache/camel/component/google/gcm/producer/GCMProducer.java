@@ -103,7 +103,7 @@ public abstract class GCMProducer extends DefaultProducer implements IGCMProduce
      */
     private GCMBody getMessageFromBodyOrHeaders(Message camelMessage) {
         GCMBody message;
-        if (nonNull(camelMessage.getBody()) instanceof GCMBody) {
+        if (camelMessage.getBody() != null && camelMessage.getBody() instanceof GCMBody) {
             //cool we already have the GCM Message in the body;
             message = (GCMBody) camelMessage.getBody();
         } else {
