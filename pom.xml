@@ -15,7 +15,7 @@
 
     <groupId>org.apache.camel</groupId>
     <artifactId>camel-google-cloud-messaging</artifactId>
-    <version>1.0.1-SNAPSHOT</version>
+    <version>1.0.1.NEARMYSELF-SNAPSHOT</version>
     <packaging>bundle</packaging>
     <name>Camel :: Google Cloud Messaging</name>
     <description>Camel Google Cloud Messaging support</description>
@@ -60,6 +60,17 @@
         </dependency>
 
     </dependencies>
+    
+    <distributionManagement>
+		<repository>
+			<id>releases</id>
+		</repository>
+		<snapshotRepository>
+			<id>snapshots</id>
+			<url>http://app1.sandbox.dosfo1.nearmyself.com:8081/nexus/content/repositories/snapshots</url>
+		</snapshotRepository>	
+	</distributionManagement>
+    
 
     <build>
         <defaultGoal>install</defaultGoal>
