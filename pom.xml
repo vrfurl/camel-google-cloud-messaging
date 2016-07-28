@@ -67,7 +67,7 @@
 		</repository>
 		<snapshotRepository>
 			<id>snapshots</id>
-			<url>http://app1.sandbox.dosfo1.nearmyself.com:8081/nexus/content/repositories/snapshots</url>
+			<url>http://vpn1.sandbox.dosfo1.nearmyself.com:8081/nexus/content/repositories/snapshots</url>
 		</snapshotRepository>	
 	</distributionManagement>
     
