@@ -34,6 +34,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <com.google.json.version>1.1.1</com.google.json.version>
+        <jackson.core.version>2.6.4</jackson.core.version>
     </properties>
 
     <dependencies>
@@ -43,14 +44,30 @@
             <version>${camel.version}</version>
         </dependency>
 
-        <!-- Simple JSON Lib the only dependency -->
+        <!-- Simple JSON Lib the only dependency --> 
         <dependency>
             <groupId>com.googlecode.json-simple</groupId>
             <artifactId>json-simple</artifactId>
             <version>${com.google.json.version}</version>
         </dependency>
-
-
+        
+                        
+	    <dependency>
+	      <groupId>com.fasterxml.jackson.core</groupId>
+	      <artifactId>jackson-core</artifactId>
+	      <version>${jackson.core.version}</version>
+	    </dependency>
+	    <dependency>
+	      <groupId>com.fasterxml.jackson.core</groupId>
+	      <artifactId>jackson-annotations</artifactId>
+	      <version>${jackson.core.version}</version>
+	    </dependency>
+	    <dependency>
+	      <groupId>com.fasterxml.jackson.core</groupId>
+	      <artifactId>jackson-databind</artifactId>
+	      <version>${jackson.core.version}</version>
+	    </dependency>
+        
         <!-- testing -->
         <dependency>
             <groupId>org.apache.camel</groupId>

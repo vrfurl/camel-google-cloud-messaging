@@ -18,9 +18,11 @@ import org.apache.camel.component.google.gcm.model.GCMNotification;
 import org.apache.camel.component.google.gcm.producer.constants.CamelHeaderConstants;
 import org.apache.camel.component.google.gcm.producer.http.RetrySender;
 import org.apache.camel.impl.DefaultProducer;
-import org.json.simple.JSONValue;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  * Created by miki on 14.04.2015.
@@ -45,6 +47,9 @@ public abstract class GCMProducer extends DefaultProducer implements IGCMProduce
      *
      */
     private static final Logger LOG = LoggerFactory.getLogger(GCMProducer.class);
+    
+    
+    private static final ObjectMapper JSON_MAPPER = new ObjectMapper();
 
     /**
      * APIKey used only once in an endpoint; Wanna do it twice? Use another endpoint
@@ -128,8 +133,13 @@ public abstract class GCMProducer extends DefaultProducer implements IGCMProduce
                 //if it's not a map there is nothing I can do with it
                 builder.addData((Map<String, String>) payLoad);
             } else {
+                try {
                 //let's make a JSON
-                builder.addData(CamelHeaderConstants.DATA, JSONValue.toJSONString(payLoad));
+                builder.addData(CamelHeaderConstants.DATA, JSON_MAPPER.writeValueAsString(payLoad));
+                }
+                catch(JsonProcessingException e) {
+                  throw new RuntimeException(e);
+                }
             }
         }
 

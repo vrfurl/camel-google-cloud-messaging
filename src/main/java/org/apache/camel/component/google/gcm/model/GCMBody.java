@@ -15,8 +15,6 @@ package org.apache.camel.component.google.gcm.model;
  * limitations under the License.
  */
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
-
 import java.io.Serializable;
 import java.util.Collections;
 import java.util.LinkedHashMap;
